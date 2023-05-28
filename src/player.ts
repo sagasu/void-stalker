@@ -1,4 +1,4 @@
-import {Game} from './game.js';
+import type { Game } from "./game";
 
 export class Player {
         game: Game;
@@ -8,7 +8,7 @@ export class Player {
         speedX: number;
         speedY: number;
         
-        constructor(game){
+        constructor(game: Game){
             this.game = game;
             this.collisionX = this.game.width * 0.5;
             this.collisionY = this.game.height * 0.5;
@@ -17,7 +17,7 @@ export class Player {
             this.speedY = 0;
         }
 
-        draw(context){
+        draw(context: CanvasRenderingContext2D){
             context.beginPath();
             context.arc(this.collisionX,this.collisionY,this.collisionRadius,0,Math.PI*2);
             context.save();

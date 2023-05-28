@@ -1,9 +1,8 @@
 import {Game} from './game.js';
-// export function foo() {
 
 window.addEventListener('load', () => {
     const canvas = <HTMLCanvasElement>document.getElementById('canvas1');
-    const ctx: CanvasRenderingContext2D = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d')!;
     ctx.fillStyle = 'white';
     ctx.lineWidth = 3;
     ctx.strokeStyle = 'white';
@@ -22,6 +21,3 @@ window.addEventListener('load', () => {
 
     animate();
 });
-
-
-// }

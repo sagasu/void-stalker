@@ -1,11 +1,11 @@
-import express, {Express, Request, Response} from 'express';
+/**
+ * This file is just a silly example to show everything working in the browser.
+ * When you're ready to start on your site, clear the file. Happy hacking!
+ **/
 
-const app: Express = express();
+import confetti from 'canvas-confetti';
 
-app.get('/', (req: Request, res: Response) => {
-    res.send('Hello World!');
-});
-
-app.listen(3000, () =>
-  console.log('Example app listening on port 3000!'),
-);
+confetti.create(document.getElementById('canvas') as HTMLCanvasElement, {
+  resize: true,
+  useWorker: true,
+})({ particleCount: 200, spread: 200 });
