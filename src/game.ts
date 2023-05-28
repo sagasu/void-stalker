@@ -1,4 +1,4 @@
-import {Player} from './player.js';
+import { Player } from './player.js';
 
 export class Game {
     canvas: any;
@@ -6,8 +6,8 @@ export class Game {
     height: any;
     player: Player;
     mouse: { x: number; y: number; pressed: boolean; };
-    
-    constructor(canvas: HTMLCanvasElement){
+
+    constructor(canvas: HTMLCanvasElement) {
         this.canvas = canvas;
         this.width = this.canvas.width;
         this.height = this.canvas.height;
@@ -31,12 +31,14 @@ export class Game {
         });
 
         window.addEventListener('mousemove', (e) => {
-            this.mouse.x = e.offsetX;
-            this.mouse.y = e.offsetY;
+            if (this.mouse.pressed) {
+                this.mouse.x = e.offsetX;
+                this.mouse.y = e.offsetY;
+            }
         });
     }
 
-    render(context: CanvasRenderingContext2D){
+    render(context: CanvasRenderingContext2D) {
         this.player.draw(context);
         this.player.update();
     }
