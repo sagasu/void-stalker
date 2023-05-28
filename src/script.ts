@@ -11,8 +11,9 @@ window.addEventListener('load', () => {
     canvas.height = 720;
 
     const game = new Game(canvas);
-    game.render(ctx);
-
+    game.init();
+    console.log(game);
+    
     function animate(){
         ctx.clearRect(0,0, canvas.width, canvas.height);
         game.render(ctx);

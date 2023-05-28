@@ -9,6 +9,7 @@ export class Player {
     speedY: number;
     dx: number;
     dy: number;
+    speedModifier: number;
 
     constructor(game: Game) {
         this.game = game;
@@ -19,6 +20,7 @@ export class Player {
         this.speedY = 0;
         this.dx = 0;
         this.dy = 0;
+        this.speedModifier = 5;
     }
 
     draw(context: CanvasRenderingContext2D) {
@@ -38,10 +40,17 @@ export class Player {
     update() {
         this.dx = this.game.mouse.x - this.collisionX;
         this.dy = this.game.mouse.y - this.collisionY;
-        this.speedX = this.dx / 20;
-        this.speedY = this.dy / 20;
-        this.collisionX += this.speedX;
-        this.collisionY += this.speedY;
+        const distance = Math.hypot(this.dy, this.dx);
+        if(distance > this.speedModifier) {
+            this.speedX = this.dx / distance || 0;
+            this.speedY = this.dy / distance || 0;
+        }else{
+            this.speedX = 0;
+            this.speedY = 0;
+        }
+        
+        this.collisionX += this.speedX * this.speedModifier;
+        this.collisionY += this.speedY * this.speedModifier;
     }
 
 
