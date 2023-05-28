@@ -15,7 +15,7 @@ export class Game {
         this.width = this.canvas.width;
         this.height = this.canvas.height;
         this.player = new Player(this);
-        this.numberOfObstacles = 5;
+        this.numberOfObstacles = 1;
         this.obstacles = [];
         this.mouse = {
             x: this.width * 0.5,
@@ -50,8 +50,21 @@ export class Game {
     }
 
     init(){
-        for(let i = 0; i< this.numberOfObstacles;i++){
-            this.obstacles.push(new Obstacle(this));
+        for(let attempts = 0; attempts < 300; attempts++){
+            if(this.obstacles.length >= this.numberOfObstacles) break;
+
+            let isOverlap = false;
+            let testObstacle = new Obstacle(this);
+
+            this.obstacles.forEach(obstacle => {
+                const dx = testObstacle.collisionX - obstacle.collisionX;
+                const dy = testObstacle.collisionY - obstacle.collisionY;
+                const distance = Math.hypot(dy, dx);
+                const sumOfRadii = testObstacle.collisionRadius + obstacle.collisionRadius;
+                if(distance < sumOfRadii) isOverlap = true; 
+            });
+
+            if(!isOverlap) this.obstacles.push(testObstacle);
         }
     }
 }
