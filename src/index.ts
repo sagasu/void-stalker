@@ -1,3 +1,11 @@
-import fs from 'fs';
+import express, {Express, Request, Response} from 'express';
 
-fs;
+const app: Express = express();
+
+app.get('/', (req: Request, res: Response) => {
+    res.send('Hello World!');
+});
+
+app.listen(3000, () =>
+  console.log('Example app listening on port 3000!'),
+);
