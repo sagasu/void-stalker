@@ -1,4 +1,5 @@
 import type { Game } from "./game";
+import { Obstacle } from "./obstacle";
 
 export class Player {
     game: Game;
@@ -51,6 +52,13 @@ export class Player {
         
         this.collisionX += this.speedX * this.speedModifier;
         this.collisionY += this.speedY * this.speedModifier;
+
+        this.game.obstacles.forEach(obstacle => {
+            let [isCollision, distance, sumOfRadii, dx, dy] = this.game.checkCollision(this, obstacle);
+            if(isCollision){
+
+            }
+        });
     }
 
 
