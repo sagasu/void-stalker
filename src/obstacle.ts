@@ -21,7 +21,7 @@ export class Obstacle {
         this.game = game;
         this.collisionX = Math.random() * this.game.width;
         this.collisionY = Math.random() * this.game.height;
-        this.collisionRadius = 60;
+        this.collisionRadius = 40;
         this.image = <CanvasImageSource>document.getElementById('obstacles')!;
         this.spriteWidth = 250;
         this.spriteHeight = 250;
@@ -36,12 +36,15 @@ export class Obstacle {
     draw(context: CanvasRenderingContext2D){
         context.drawImage(this.image, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, 
                                       this.spriteX, this.spriteY, this.width, this.height);
-        context.beginPath();
-        context.arc(this.collisionX, this.collisionY, this.collisionRadius, 0, Math.PI * 2);
-        context.save();
-        context.globalAlpha = 0.5;
-        context.fill();
-        context.restore();
-        context.stroke();
+        if(this.game.isDebug){
+            context.beginPath();
+            context.arc(this.collisionX, this.collisionY, this.collisionRadius, 0, Math.PI * 2);
+            context.save();
+            context.globalAlpha = 0.5;
+            context.fill();
+            context.restore();
+            context.stroke();
+        }
+        
     }
 }

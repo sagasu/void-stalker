@@ -10,6 +10,7 @@ export class Game {
     obstacles: Obstacle[];
     numberOfObstacles: number;
     topMargin: number;
+    isDebug: boolean;
 
     constructor(canvas: HTMLCanvasElement) {
         this.canvas = canvas;
@@ -19,6 +20,7 @@ export class Game {
         this.numberOfObstacles = 10;
         this.obstacles = [];
         this.topMargin = 260;
+        this.isDebug = false;
         this.mouse = {
             x: this.width * 0.5,
             y: this.height * 0.5,
@@ -42,6 +44,10 @@ export class Game {
                 this.mouse.x = e.offsetX;
                 this.mouse.y = e.offsetY;
             }
+        });
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key == 'd') this.isDebug = !this.isDebug;
         });
     }
 

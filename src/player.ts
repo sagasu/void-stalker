@@ -49,17 +49,19 @@ export class Player {
     draw(context: CanvasRenderingContext2D) {
         context.drawImage(this.image, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, this.spriteX, this.spriteY, this.width, this.height);
 
-        context.beginPath();
-        context.arc(this.collisionX, this.collisionY, this.collisionRadius, 0, Math.PI * 2);
-        context.save();
-        context.globalAlpha = 0.5;
-        context.fill();
-        context.restore();
-        context.stroke();
-        context.beginPath();
-        context.moveTo(this.collisionX, this.collisionY);
-        context.lineTo(this.game.mouse.x, this.game.mouse.y);
-        context.stroke();
+        if(this.game.isDebug){
+            context.beginPath();
+            context.arc(this.collisionX, this.collisionY, this.collisionRadius, 0, Math.PI * 2);
+            context.save();
+            context.globalAlpha = 0.5;
+            context.fill();
+            context.restore();
+            context.stroke();
+            context.beginPath();
+            context.moveTo(this.collisionX, this.collisionY);
+            context.lineTo(this.game.mouse.x, this.game.mouse.y);
+            context.stroke();
+        }
     }
 
     update() {
@@ -69,7 +71,7 @@ export class Player {
         this.dy = this.game.mouse.y - this.collisionY;
 
         const angle = Math.atan2(this.dy, this.dx);
-        
+
         if(angle < -2.74 || angle > 2.74) this.frameY = 6;
         else if(angle < -1.96) this.frameY = 7;
         else if(angle < -1.17) this.frameY = 0;
