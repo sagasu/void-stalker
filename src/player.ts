@@ -25,12 +25,12 @@ export class Player {
         this.game = game;
         this.collisionX = this.game.width * 0.5;
         this.collisionY = this.game.height * 0.5;
-        this.collisionRadius = 50;
+        this.collisionRadius = 30;
         this.speedX = 0;
         this.speedY = 0;
         this.dx = 0;
         this.dy = 0;
-        this.speedModifier = 5;
+        this.speedModifier = 3;
 
         this.spriteWidth = 255;
         this.spriteHeight = 255;
@@ -96,6 +96,12 @@ export class Player {
 
         this.spriteX = this.collisionX - this.width * 0.5;
         this.spriteY = this.collisionY - this.height * 0.5  - 100;
+
+        if(this.collisionX < this.collisionRadius) this.collisionX = this.collisionRadius;
+        else if(this.collisionX > this.game.width - this.collisionRadius) this.collisionX = this.game.width - this.collisionRadius;
+
+        if(this.collisionY < this.game.topMargin + this.collisionRadius) this.collisionY = this.game.topMargin + this.collisionRadius;
+        else if(this.collisionY > this.game.height - this.collisionRadius) this.collisionY = this.game.height - this.collisionRadius; 
 
         this.game.obstacles.forEach(obstacle => {
             let [isCollision, distance, sumOfRadii, dx, dy] = this.game.checkCollision(this, obstacle);
