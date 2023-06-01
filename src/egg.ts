@@ -1,7 +1,7 @@
 import { DebugUtils } from "./debugUtils";
 import type { Game } from "./game";
 
-class Egg {
+export class Egg {
     game: Game;
     collisionY: number;
     collisionX: number;
@@ -14,19 +14,22 @@ class Egg {
     spriteX: number;
     spriteY: number;
     debugUtils: DebugUtils;
+    margin: number;
 
     constructor(game : Game){
         this.game = game;
-        this.collisionX = Math.random() * this.game.width;
-        this.collisionY = Math.random() * this.game.height;
         this.collisionRadius = 40;
+        this.margin = this.collisionRadius * 2;
+
+        this.collisionX = this.margin + (Math.random() * (this.game.width - this.margin * 2));
+        this.collisionY = this.game.topMargin + (Math.random() * (this.game.height - this.game.topMargin - this.margin));
         this.image = <CanvasImageSource>document.getElementById('egg');
         this.spriteWidth = 110;
         this.spriteHeight = 135;
         this.width = this.spriteWidth;
         this.height = this.spriteHeight;
-        this.spriteX = this.collisionX + this.width * 0.5;
-        this.spriteY = this.collisionY + this.height * 0.5;
+        this.spriteX = this.collisionX - this.width * 0.5;
+        this.spriteY = this.collisionY - this.height * 0.5 + 35;
         this.debugUtils = new DebugUtils();
     }
 
@@ -36,4 +39,7 @@ class Egg {
         this.debugUtils.draw(ctx, this.game, this.collisionX, this.collisionY, this.collisionRadius);
     }
 
+    update(){
+        let collisionObject = [this.game.player, this.game.obstacles] 
+    }
 }
