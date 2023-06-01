@@ -14,11 +14,14 @@ window.addEventListener('load', () => {
     game.init();
     console.log(game);
     
-    function animate(){
-        ctx.clearRect(0,0, canvas.width, canvas.height);
-        game.render(ctx);
+    let lastTime = 0;
+
+    function animate(timeStamp: number){
+        const dt = timeStamp - lastTime;
+        lastTime = timeStamp;
+        game.render(ctx, dt);
         window.requestAnimationFrame(animate);
     }
 
-    animate();
+    animate(0);
 });

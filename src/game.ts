@@ -11,6 +11,9 @@ export class Game {
     numberOfObstacles: number;
     topMargin: number;
     isDebug: boolean;
+    fps: number;
+    timer: number;
+    interval: number;
 
     constructor(canvas: HTMLCanvasElement) {
         this.canvas = canvas;
@@ -21,6 +24,10 @@ export class Game {
         this.obstacles = [];
         this.topMargin = 260;
         this.isDebug = false;
+        this.fps = 80;
+        this.timer = 0;
+        this.interval = 1000/this.fps;
+
         this.mouse = {
             x: this.width * 0.5,
             y: this.height * 0.5,
@@ -51,10 +58,16 @@ export class Game {
         });
     }
 
-    render(context: CanvasRenderingContext2D) {
-        this.player.draw(context);
-        this.player.update();
-        this.obstacles.forEach(obstacle => obstacle.draw(context));
+    render(ctx: CanvasRenderingContext2D, deltaTime: number) {
+        if(this.timer > this.interval) {
+            ctx.clearRect(0,0, this.width, this.height);
+            this.obstacles.forEach(obstacle => obstacle.draw(ctx));
+            this.player.draw(ctx);
+            this.player.update();
+            this.timer = 0;
+        }
+        this.timer += deltaTime;
+        
     }
 
     checkCollision(a: Player, b: Obstacle):[boolean, number, number, number, number] {

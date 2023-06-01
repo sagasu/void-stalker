@@ -33,7 +33,7 @@ export class Player {
         this.speedModifier = 3;
 
         this.spriteWidth = 255;
-        this.spriteHeight = 255;
+        this.spriteHeight = 256;
         this.width = this.spriteWidth;
         this.height = this.spriteHeight;
 
