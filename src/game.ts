@@ -86,7 +86,7 @@ export class Game {
         }
     }
 
-    checkCollision(a: Player, b: Obstacle):[boolean, number, number, number, number] {
+    checkCollision(a: ICollision, b: Obstacle):[boolean, number, number, number, number] {
         const dx = a.collisionX - b.collisionX;
         const dy = a.collisionY - b.collisionY;
         const distance = Math.hypot(dy, dx);

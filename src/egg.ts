@@ -1,7 +1,7 @@
 import { DebugUtils } from "./debugUtils";
 import type { Game } from "./game";
 
-export class Egg {
+export class Egg implements ICollision{
     game: Game;
     collisionY: number;
     collisionX: number;
@@ -40,6 +40,9 @@ export class Egg {
     }
 
     update(){
-        let collisionObject = [this.game.player, this.game.obstacles] 
+        let collisionObject = [this.game.player, ...this.game.obstacles];
+        collisionObject.forEach(object => {
+            let [collision, distance, sumOfRadii, dx, dy] = this.game.checkCollision(this, object);
+        });
     }
 }

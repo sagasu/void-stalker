@@ -1,7 +1,7 @@
 import { DebugUtils } from "./debugUtils";
 import type { Game } from "./game";
 
-export class Obstacle {
+export class Obstacle implements ICollision {
     game: Game;
     collisionX: number;
     collisionY: number;

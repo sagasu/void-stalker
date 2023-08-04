@@ -1,7 +1,7 @@
 import type { Game } from "./game";
 import { Obstacle } from "./obstacle";
 
-export class Player {
+export class Player implements ICollision {
     game: Game;
     collisionX: number;
     collisionY: number;
