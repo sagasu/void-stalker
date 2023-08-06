@@ -1,4 +1,6 @@
 import { Egg } from './egg.js';
+import type { ICollision } from './iCollision.js';
+import type { IDrawUpdate } from './iDrawUpdate.js';
 import { Obstacle } from './obstacle.js';
 import { Player } from './player.js';
 
@@ -16,6 +18,7 @@ export class Game {
     timer: number;
     interval: number;
     eggs: Egg[];
+    gameObjects: IDrawUpdate[];
     maxEggs: number;
     eggTimer: number;
     eggInterval: number;
@@ -35,6 +38,7 @@ export class Game {
         this.eggTimer = 0;
         this.eggInterval = 1000;
         this.eggs = [];
+        this.gameObjects  = [];
         this.maxEggs = 10;
 
         this.mouse = {
@@ -70,13 +74,17 @@ export class Game {
     render(ctx: CanvasRenderingContext2D, deltaTime: number) {
         if(this.timer > this.interval) {
             ctx.clearRect(0,0, this.width, this.height);
-            this.obstacles.forEach(obstacle => obstacle.draw(ctx));
-            this.eggs.forEach(egg => {
-                egg.draw(ctx);
-                egg.update();
+
+            this.gameObjects = [...this.eggs, ...this.obstacles, this.player];
+            this.gameObjects.sort((a, b) => {
+                return a.collisionY -  b.collisionY;
             });
-            this.player.draw(ctx);
-            this.player.update();
+            
+            this.gameObjects.forEach(obj => {
+                obj.draw(ctx);
+                obj.update();
+            });
+            
             this.timer = 0;
         }
         this.timer += deltaTime;

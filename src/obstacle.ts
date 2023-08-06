@@ -1,7 +1,9 @@
 import { DebugUtils } from "./debugUtils";
 import type { Game } from "./game";
+import type { ICollision } from "./iCollision";
+import type { IDrawUpdate } from "./iDrawUpdate";
 
-export class Obstacle implements ICollision {
+export class Obstacle implements ICollision, IDrawUpdate {
     game: Game;
     collisionX: number;
     collisionY: number;
@@ -44,4 +46,6 @@ export class Obstacle implements ICollision {
         this.debugUtils.draw(ctx, this.game, this.collisionX, this.collisionY, this.collisionRadius);
         
     }
+
+    update(){}
 }

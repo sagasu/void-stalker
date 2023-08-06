@@ -1,7 +1,8 @@
 import type { Game } from "./game";
-import { Obstacle } from "./obstacle";
+import type { ICollision } from "./iCollision";
+import type { IDrawUpdate } from "./iDrawUpdate";
 
-export class Player implements ICollision {
+export class Player implements ICollision, IDrawUpdate {
     game: Game;
     collisionX: number;
     collisionY: number;

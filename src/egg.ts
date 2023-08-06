@@ -1,7 +1,9 @@
 import { DebugUtils } from "./debugUtils";
 import type { Game } from "./game";
+import type { ICollision } from "./iCollision";
+import type { IDrawUpdate } from "./iDrawUpdate";
 
-export class Egg implements ICollision{
+export class Egg implements ICollision, IDrawUpdate{
     game: Game;
     collisionY: number;
     collisionX: number;
