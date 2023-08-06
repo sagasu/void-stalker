@@ -71,7 +71,10 @@ export class Game {
         if(this.timer > this.interval) {
             ctx.clearRect(0,0, this.width, this.height);
             this.obstacles.forEach(obstacle => obstacle.draw(ctx));
-            this.eggs.forEach(egg => egg.draw(ctx));
+            this.eggs.forEach(egg => {
+                egg.draw(ctx);
+                egg.update();
+            });
             this.player.draw(ctx);
             this.player.update();
             this.timer = 0;

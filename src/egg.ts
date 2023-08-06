@@ -40,9 +40,18 @@ export class Egg implements ICollision{
     }
 
     update(){
+        this.spriteX = this.collisionX - this.width * 0.5;
+        this.spriteY = this.collisionY - this.height * 0.5 + 35;
+        
         let collisionObject = [this.game.player, ...this.game.obstacles];
         collisionObject.forEach(object => {
             let [collision, distance, sumOfRadii, dx, dy] = this.game.checkCollision(this, object);
+            if(collision){
+                const unit_x = dx / distance;
+                const unit_y = dy / distance;
+                this.collisionX = object.collisionX + (sumOfRadii + 1) * unit_x;
+                this.collisionY = object.collisionY + (sumOfRadii + 1) * unit_y;
+            }
         });
     }
 }
