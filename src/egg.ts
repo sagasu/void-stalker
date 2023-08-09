@@ -31,7 +31,7 @@ export class Egg implements ICollision, IDrawUpdate{
         this.width = this.spriteWidth;
         this.height = this.spriteHeight;
         this.spriteX = this.collisionX - this.width * 0.5;
-        this.spriteY = this.collisionY - this.height * 0.5 + 35;
+        this.spriteY = this.collisionY - this.height * 0.5 - 35;
         this.debugUtils = new DebugUtils();
     }
 
@@ -43,7 +43,7 @@ export class Egg implements ICollision, IDrawUpdate{
 
     update(){
         this.spriteX = this.collisionX - this.width * 0.5;
-        this.spriteY = this.collisionY - this.height * 0.5 + 35;
+        this.spriteY = this.collisionY - this.height * 0.5 - 35;
         
         let collisionObject = [this.game.player, ...this.game.obstacles];
         collisionObject.forEach(object => {
