@@ -2,6 +2,10 @@ import type { Game } from "./game";
 
 export class Enemy {
     game: Game;
+    collisionY: number;
+    collisionX: number;
+    collisionRadius: number;
+    speedX: number;
 
     constructor(game:Game){
         this.game = game;
