@@ -7,7 +7,7 @@ export class Enemy {
     collisionRadius: number;
     speedX: number;
 
-    constructor(game:Game){
+    constructor(game: Game){
         this.game = game;
         this.collisionRadius = 30;
         this.collisionX = this.game.width;
