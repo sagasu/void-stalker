@@ -48,7 +48,7 @@ export class Egg implements ICollision, IDrawUpdate{
         let collisionObject = [this.game.player, ...this.game.obstacles];
         collisionObject.forEach(object => {
             let [collision, distance, sumOfRadii, dx, dy] = this.game.checkCollision(this, object);
-            if(collision){
+            if(collision) {
                 const unit_x = dx / distance;
                 const unit_y = dy / distance;
                 this.collisionX = object.collisionX + (sumOfRadii + 1) * unit_x;
