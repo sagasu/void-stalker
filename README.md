@@ -21,5 +21,5 @@ No eject needed! Snowpack guarantees zero lock-in, and CSA strives for the same.
 
 # Snowpack
 To be able to use es6 modules and write in typescript you need a bundler to import es6 modules in browser, otherwise browser will not be able to run js files transpiled from typescript because it will not understand keywords as 'import', 'export' and so on.
-To setup bundler with typescript and everything you can just run:
+To setup bundler with typescript and everything you can just run:  
 `npx create-snowpack-app . --template @snowpack/app-template-blank-typescript`
